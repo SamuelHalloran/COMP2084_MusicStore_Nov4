@@ -45,6 +45,8 @@ namespace COMP2084_MusicStore.Controllers
         // GET: Songs/Create
         public IActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated) return Redirect("/Identity/Account/Login");
+
             var albums = _context.Album.OrderBy(x => x.Title).Select(x => new { Id = x.AlbumId, Value = x.Title });
 
             ViewBag.AlbumsList = new SelectList(albums, "Id", "Value");
