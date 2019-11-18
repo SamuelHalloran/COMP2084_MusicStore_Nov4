@@ -70,7 +70,7 @@ namespace COMP2084_MusicStore
 
             app.UseAuthentication();
 
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -78,7 +78,6 @@ namespace COMP2084_MusicStore
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseSession();
             app.UseMvcWithDefaultRoute();
         }
     }

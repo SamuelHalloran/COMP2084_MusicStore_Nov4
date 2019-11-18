@@ -16,12 +16,23 @@ namespace COMP2084_MusicStore.Controllers
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            var cart = ShoppingCart.GetCart(_context, HttpContext);
+
+            return View(new ShoppingCartViewModel
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            });
+        }
+
         public IActionResult AddToCart(int SongId)
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = ShoppingCart.GetCart(_context, this.HttpContext);
             var song = _context.Song.SingleOrDefault(s => s.SongId == SongId);
 
-            cart.AddToCart(_context, song);
+            cart.AddToCart(song);
 
             return RedirectToAction("Index");
         }

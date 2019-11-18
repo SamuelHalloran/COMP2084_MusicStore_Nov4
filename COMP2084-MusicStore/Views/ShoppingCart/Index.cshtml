@@ -1,0 +1,44 @@
+﻿@model COMP2084_MusicStore.Models.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Song</th>
+            <th>Album</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CartItems) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Song.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Song.Album.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Song.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ShoppingCartLineItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
