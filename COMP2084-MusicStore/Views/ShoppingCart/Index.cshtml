@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Shopping Cart</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -21,24 +18,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CartItems) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Album.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Count)
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.ShoppingCartLineItemId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Album.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Song.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove From Cart", "RemoveFromCart", "ShoppingCart", new { SongId = item.SongId }, new { })
+                </td>
+            </tr>
+
+
+        }
+
+
     </tbody>
+
 </table>
+
+ Subtotal:<strong>@Model.CartTotal.ToString("C")</strong>
