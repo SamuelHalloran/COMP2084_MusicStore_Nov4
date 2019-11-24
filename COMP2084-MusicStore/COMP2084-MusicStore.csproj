@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-COMP2084_MusicStore-FAAA957D-BFD4-4A71-8C36-58EED5C9EE29</UserSecretsId>
+    <RootNamespace>COMP2084_MusicStore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

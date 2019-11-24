@@ -15,6 +15,8 @@ namespace COMP2084_MusicStore.Models
         [ForeignKey("Album")]
         public int AlbumId { get; set; }
 
+        public decimal Price { get; set; }
+
         public string Title { get; set; }
 
         public string Featuring { get; set; }
@@ -22,5 +24,7 @@ namespace COMP2084_MusicStore.Models
         public string ArtistName { get; set; }
 
         public int RunTimeSeconds { get; set; }
+
+        public Album Album { get; set; }
     }
 }
