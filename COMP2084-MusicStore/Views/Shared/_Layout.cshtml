@@ -1,6 +1,4 @@
-﻿@inject COMP2084_MusicStore.Controllers.ShoppingCartService scs;
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -39,7 +37,7 @@
                     <li><a asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
 
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart (@scs.GetCurrentCart().GetCartItems().Count)</a></li>
+                    <li><a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart</a></li>
 
                     @if (!User.Identity.IsAuthenticated)
                     {
