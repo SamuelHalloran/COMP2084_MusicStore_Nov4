@@ -16,7 +16,6 @@ namespace COMP2084_MusicStore.Controllers
             _context = context;
         }
 
-
         public IActionResult Index()
         {
             var cart = ShoppingCart.GetCart(_context, HttpContext);
@@ -34,6 +33,29 @@ namespace COMP2084_MusicStore.Controllers
             var song = _context.Song.SingleOrDefault(x => x.SongId == SongId);
 
             cart.AddToCart(song);
+
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult RemoveFromCart(int SongId)
+        {
+            var shoppingCart = ShoppingCart.GetCart(_context, HttpContext);
+
+            var songLineItem = _context.ShoppingCartLineItem.Where(x => x.ShoppingCartId == shoppingCart.ShoppingCartId && x.SongId == SongId).SingleOrDefault();
+
+
+            if (songLineItem.Count == 1)
+            {
+                _context.ShoppingCartLineItem.Remove(songLineItem);
+            }
+            else
+            {
+                songLineItem.Count--;
+                _context.Entry(songLineItem).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            }
+
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }

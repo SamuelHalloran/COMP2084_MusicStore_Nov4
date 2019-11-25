@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace COMP2084_MusicStore.Models
@@ -15,7 +16,11 @@ namespace COMP2084_MusicStore.Models
         [ForeignKey("Album")]
         public int AlbumId { get; set; }
 
+
         public decimal Price { get; set; }
+
+        public Album Album { get; set; }
+
 
         public string Title { get; set; }
 

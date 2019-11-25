@@ -45,6 +45,8 @@ namespace COMP2084_MusicStore.Controllers
         // GET: Songs/Create
         public IActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated) return Redirect("/Identity/Account/Login");
+
             var albums = _context.Album.OrderBy(x => x.Title).Select(x => new { Id = x.AlbumId, Value = x.Title });
 
             ViewBag.AlbumsList = new SelectList(albums, "Id", "Value");
@@ -75,12 +77,17 @@ namespace COMP2084_MusicStore.Controllers
             {
                 return NotFound();
             }
-
+            
             var song = await _context.Song.FindAsync(id);
             if (song == null)
             {
                 return NotFound();
             }
+
+            var albums = _context.Album.OrderBy(x => x.Title).Select(x => new { Id = x.AlbumId, Value = x.Title });
+
+            ViewBag.AlbumsList = new SelectList(albums, "Id", "Value");
+
             return View(song);
         }
 
@@ -89,7 +96,7 @@ namespace COMP2084_MusicStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SongId,AlbumId,Title,Featuring")] Song song)
+        public async Task<IActionResult> Edit(int id, [Bind("SongId,AlbumId,Title,Price,Featuring")] Song song)
         {
             if (id != song.SongId)
             {

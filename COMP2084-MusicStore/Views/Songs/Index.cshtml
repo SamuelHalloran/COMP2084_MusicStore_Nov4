@@ -34,7 +34,9 @@
                 <a asp-action="Edit" asp-route-id="@item.SongId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SongId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.SongId">Delete</a> |
-                @Html.ActionLink("Add To Cart", "AddToCart", "ShoppingCart", new { SongId = item.SongId })
+
+                @Html.ActionLink("Add To Cart", "AddToCart", "ShoppingCart", new { SongId = item.SongId }, new { })
+
             </td>
         </tr>
 }

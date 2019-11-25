@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using COMP2084_MusicStore.Models;
+using COMP2084_MusicStore.Controllers;
 
 namespace COMP2084_MusicStore
 {
@@ -49,6 +50,9 @@ namespace COMP2084_MusicStore
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
 
+            services.AddSession();
+
+
             services.AddDbContext<MusicStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicStoreContext")));
         }
@@ -64,6 +68,8 @@ namespace COMP2084_MusicStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+           
 
             app.UseAuthentication();
 

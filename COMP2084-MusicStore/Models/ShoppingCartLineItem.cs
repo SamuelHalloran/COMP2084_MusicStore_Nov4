@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace COMP2084_MusicStore.Models
 {
     public class ShoppingCartLineItem
     {
+
         [Key]
         public int ShoppingCartLineItemId { get; set; }
 
