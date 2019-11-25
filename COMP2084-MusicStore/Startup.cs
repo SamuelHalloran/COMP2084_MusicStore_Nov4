@@ -52,6 +52,7 @@ namespace COMP2084_MusicStore
 
             services.AddSession();
 
+            services.AddTransient<ShoppingCartService>();
 
             services.AddDbContext<MusicStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicStoreContext")));

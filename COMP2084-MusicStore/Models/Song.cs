@@ -30,6 +30,5 @@ namespace COMP2084_MusicStore.Models
 
         public int RunTimeSeconds { get; set; }
 
-        public Album Album { get; set; }
     }
 }
