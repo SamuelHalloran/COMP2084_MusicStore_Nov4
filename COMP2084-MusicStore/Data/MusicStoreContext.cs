@@ -22,6 +22,7 @@ namespace COMP2084_MusicStore.Models
         public DbSet<COMP2084_MusicStore.Models.Song> Song { get; set; }
 
 
+
         public DbSet<COMP2084_MusicStore.Models.ShoppingCart> ShoppingCart { get; set; }
 
 

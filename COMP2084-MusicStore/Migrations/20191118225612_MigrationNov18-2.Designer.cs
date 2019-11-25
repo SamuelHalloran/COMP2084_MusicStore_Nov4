@@ -4,14 +4,16 @@ using COMP2084_MusicStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace COMP2084_MusicStore.Migrations
 {
     [DbContext(typeof(MusicStoreContext))]
-    partial class MusicStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20191118225612_MigrationNov18-2")]
+    partial class MigrationNov182
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +158,6 @@ namespace COMP2084_MusicStore.Migrations
 
                     b.HasIndex("SongId");
 
-
                     b.ToTable("ShoppingCartLineItem");
                 });
 
@@ -284,18 +285,16 @@ namespace COMP2084_MusicStore.Migrations
                     b.HasOne("COMP2084_MusicStore.Models.ShoppingCart")
                         .WithMany("ShoppingCartLineItems")
                         .HasForeignKey("ShoppingCartId");
-                        
+
                     b.HasOne("COMP2084_MusicStore.Models.Song", "Song")
                         .WithMany()
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade);
-
                 });
 
             modelBuilder.Entity("COMP2084_MusicStore.Models.Song", b =>
                 {
                     b.HasOne("COMP2084_MusicStore.Models.Album", "Album")
-
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade);

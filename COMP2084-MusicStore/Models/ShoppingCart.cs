@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+
+using System.ComponentModel.DataAnnotations;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,12 +11,14 @@ namespace COMP2084_MusicStore.Models
 {
     public class ShoppingCart
     {
+
+        [Key]
         public string ShoppingCartId { get; set; }
 
         public MusicStoreContext dbContext { get; set; }
 
         public ICollection<ShoppingCartLineItem> ShoppingCartLineItems { get; set; }
-        
+
         public List<ShoppingCartLineItem> GetCartItems()
         {
             List<ShoppingCartLineItem> lineItems = dbContext.ShoppingCartLineItem.Where(x => x.ShoppingCartId == ShoppingCartId).ToList();
@@ -24,7 +29,8 @@ namespace COMP2084_MusicStore.Models
                 li.Song.Album = dbContext.Album.Where(x => x.AlbumId == li.Song.AlbumId).SingleOrDefault();
             }
 
-            return lineItems;   
+            return lineItems;
+
         }
 
         public decimal GetTotal()
@@ -39,6 +45,7 @@ namespace COMP2084_MusicStore.Models
         public static ShoppingCart GetCart(MusicStoreContext db, HttpContext http)
         {
             var cart = new ShoppingCart();
+
             cart.dbContext = db;
             cart.ShoppingCartId = cart.GetCartId(http);
 
@@ -48,7 +55,7 @@ namespace COMP2084_MusicStore.Models
 
             if (existingCart == null)
             {
-                Console.WriteLine("Creating New Cart");
+
                 db.ShoppingCart.Add(cart);
                 db.SaveChanges();
             }
@@ -56,16 +63,20 @@ namespace COMP2084_MusicStore.Models
             return cart;
         }
 
+
+
         public void AddToCart(Song song)
         {
             var cartItem = dbContext.ShoppingCartLineItem.SingleOrDefault(
                     c => c.ShoppingCartId == this.ShoppingCartId
                     && c.SongId == song.SongId
+
                 );
 
             if (cartItem == null)
             {
                 cartItem = new ShoppingCartLineItem {
+
                     SongId = song.SongId,
                     ShoppingCartId = this.ShoppingCartId,
                     Count = 1
@@ -80,6 +91,7 @@ namespace COMP2084_MusicStore.Models
 
             dbContext.SaveChanges();
         }
+
 
         public string GetCartId(HttpContext http)
         {
@@ -101,6 +113,6 @@ namespace COMP2084_MusicStore.Models
 
             return http.Session.GetString("CartId");
         }
-        
+     
     }
 }

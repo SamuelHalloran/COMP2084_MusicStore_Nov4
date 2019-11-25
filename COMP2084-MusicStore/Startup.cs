@@ -49,9 +49,9 @@ namespace COMP2084_MusicStore
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
+
             services.AddSession();
 
-            services.AddTransient<ShoppingCartService>();
 
             services.AddDbContext<MusicStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicStoreContext")));
@@ -74,6 +74,7 @@ namespace COMP2084_MusicStore
             app.UseAuthentication();
 
             app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

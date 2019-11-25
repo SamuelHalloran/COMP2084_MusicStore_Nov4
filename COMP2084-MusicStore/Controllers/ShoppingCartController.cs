@@ -29,13 +29,14 @@ namespace COMP2084_MusicStore.Controllers
 
         public IActionResult AddToCart(int SongId)
         {
-            var cart = ShoppingCart.GetCart(_context, this.HttpContext);
-            var song = _context.Song.SingleOrDefault(s => s.SongId == SongId);
+            var cart = ShoppingCart.GetCart(_context, HttpContext);
+            var song = _context.Song.SingleOrDefault(x => x.SongId == SongId);
 
             cart.AddToCart(song);
 
             return RedirectToAction("Index");
         }
+
 
         public IActionResult RemoveFromCart(int SongId)
         {

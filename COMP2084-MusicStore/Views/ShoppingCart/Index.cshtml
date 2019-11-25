@@ -18,32 +18,28 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.CartItems)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Song.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Song.Album.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Song.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Count)
-                </td>
-                <td>
-                    @Html.ActionLink("Remove From Cart", "RemoveFromCart", "ShoppingCart", new { SongId = item.SongId }, new { })
-                </td>
-            </tr>
 
-
-        }
-
-
+@foreach (var item in Model.CartItems) {
+        <tr>
+           <td>
+               @Html.DisplayFor(x => item.Song.Title)
+           </td>
+            <td>
+                @Html.DisplayFor(x => item.Song.Album.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Song.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Remove From Cart", "RemoveFromCart", "ShoppingCart", new { SongId = item.SongId })
+            </td>
+        </tr>
+}
     </tbody>
-
 </table>
 
- Subtotal:<strong>@Model.CartTotal.ToString("C")</strong>
+Subtotal: <strong>@Model.CartTotal.ToString("C")</strong>
+

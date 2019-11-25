@@ -8,6 +8,7 @@ namespace COMP2084_MusicStore.Models
     public class ShoppingCartViewModel
     {
         public List<ShoppingCartLineItem> CartItems { get; set; }
+
         public decimal CartTotal { get; set; }
     }
 }
