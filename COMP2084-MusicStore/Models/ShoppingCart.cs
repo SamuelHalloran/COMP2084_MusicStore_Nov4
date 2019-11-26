@@ -42,6 +42,15 @@ namespace COMP2084_MusicStore.Models
             return total ?? decimal.Zero;
         }
 
+        public int GetTotalQuantity()
+        {
+            int? total = (from li in dbContext.ShoppingCartLineItem
+                              where li.ShoppingCartId == ShoppingCartId
+                              select (int?)li.Count).Sum();
+
+            return total ?? 0;
+        }
+
         public static ShoppingCart GetCart(MusicStoreContext db, HttpContext http)
         {
             var cart = new ShoppingCart();

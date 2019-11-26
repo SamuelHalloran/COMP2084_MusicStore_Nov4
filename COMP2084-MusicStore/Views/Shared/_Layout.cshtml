@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject COMP2084_MusicStore.Controllers.ShoppingCartService scs
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -37,7 +39,7 @@
                     <li><a asp-area="" asp-controller="Genres" asp-action="Index">Genres</a></li>
 
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart</a></li>
+                    <li><a asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart [@scs.GetCurrentCart().GetTotalQuantity()]</a></li>
 
                     @if (!User.Identity.IsAuthenticated)
                     {
@@ -55,7 +57,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - COMP2084_MusicStore</p>
+            <p>&copy; 2019 - COMP2084_MusicStore - @scs.GetTestInfo()</p>
         </footer>
     </div>
 

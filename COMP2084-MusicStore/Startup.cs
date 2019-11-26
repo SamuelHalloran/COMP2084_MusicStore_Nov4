@@ -48,13 +48,16 @@ namespace COMP2084_MusicStore
                 .AddDefaultTokenProviders();
 
 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
+
 
             services.AddSession();
 
-
             services.AddDbContext<MusicStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MusicStoreContext")));
+
+            services.AddTransient<ShoppingCartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
